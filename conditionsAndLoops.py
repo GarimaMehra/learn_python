@@ -254,3 +254,51 @@ def matrix4(x,y,Sum):
       j=j+1 
     print("")   
     i=i+1
+
+
+"""
+2,2,3
+
+0,0,0  0,0,1  0,0,2
+0,1,0  0,1,1  0,1,2
+
+1,0,0  1,0,1  1,0,2
+1,1,0  1,1,1  1,1,2
+"""
+
+def matrix5(x,y,z):
+  i=0
+  while (i<x):
+    j=0
+    while (j<y):
+      k=0
+      while (k<z):
+        print (str(i) + ","+ str(j) + "," + str(k), end = " ")
+        k=k+1
+      print('')  
+      j=j+1 
+    print("")   
+    i=i+1
+
+def star(x):
+  i=1
+  while (i<x+1):
+    j=1
+    while (j<i+1):
+      print("*", end = " ")
+      j=j+1
+    print("")
+    i=i+1
+
+
+def star2(x):
+  y=2*x-1
+  i=1
+  while (i<x+1):
+    j=1
+    while (j<y+1):
+      if(j==x) or ():
+       print("*", end = " ")
+      j=j+1
+    print("")
+    i=i+1

@@ -1,4 +1,4 @@
-import conditions as c
+import conditionsAndLoops as c
 import github_ex as g
 import variablesConstantsScope as v
 ankitNew = "different variable"
