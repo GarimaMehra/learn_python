@@ -198,4 +198,59 @@ def matrix(x):
     i+=1
 
 
+"""
 
+4, 6
+1,1 1,2 1,3 1,4 1,5 1,6
+2,1 2,2 2,3 2,4 2,5 2,6
+3,1 3,2 3,3 3,4 3,5 3,6
+4,1 4,2 4,3 4,4 4,5 4,6
+"""
+def matrix2(x,y):
+  i = 1
+  while (i < x+1):
+    j = 1
+    while( j < y+1 ):
+      print( str(i) + "," + str(j),  end = "  ")
+      j += 1
+    print("")
+    i+=1
+
+"""
+2,3
+0,0 0,1 0,2
+1,0 1,1 1,2
+"""
+
+def matrix3(x,y):
+  i = 0
+  while (i< x):
+    j = 0
+    while( j< y):
+      print( str(i) + "," + str(j),  end = "  ")
+      j += 1
+    print("")
+    i+=1
+
+
+"""
+2,3 (sum=2)
+
+0,0 0,1 0,2
+1,0 1,1 1,2
+inme se jinka sum 2
+
+0,2 1,1
+
+"""
+
+def matrix4(x,y,Sum):
+  i=0
+  while (i<x):
+    j=0
+    while (j<y):
+      if (i+j == Sum):
+        print (str(i) + ","+ str(j), end = " ")
+      j=j+1 
+    print("")   
+    i=i+1
