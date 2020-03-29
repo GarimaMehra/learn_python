@@ -3,6 +3,7 @@ import github_ex as g
 import variablesConstantsScope as v
 import edabit as e
 import functionsAndTheirScope as f
+import BooleansAndString as b
 ankitNew = "different variable"
 #red = 'red'
 
