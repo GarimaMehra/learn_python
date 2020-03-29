@@ -297,8 +297,10 @@ def star2(x):
   while (i<x+1):
     j=1
     while (j<y+1):
-      if(j==x) or ():
+      if(j==x) or (i==x):
        print("*", end = " ")
+      else:
+        print("") 
       j=j+1
     print("")
     i=i+1
