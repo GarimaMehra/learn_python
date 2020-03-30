@@ -1,3 +1,4 @@
+ 
 """
 Boolean or Bool is a type a constants( e.g integer, float).
 it has only 2 values. True with captial T. And, False with capital F.
@@ -50,3 +51,70 @@ def stringOperations(x):
 
 
 
+def char_k(x,y):
+  if (x[y-1] == 'k'):
+    return True
+  else:
+    return False  
+
+
+def start_end(x,y):
+  if (x[y-1] == x[-y]):
+    return True
+  else:
+    return False  
+
+
+def rev_string(x):
+  i = 0
+  while (i < len(x)):
+    print(x[-(i+1)])
+    i=i+1
+
+
+def rev_string2(x):
+    i = 0
+    for i in len(x):
+      return (x[-(i+1)])
+
+
+def palindrome(x):
+  response ='False'
+  i=0
+  count=0
+  while (i < len(x)/2):
+    if (x[i] == x[-(i+1)]):
+      count=count+1
+    i=i+1
+  if ( (len(x)%2 == 0) and (count == len(x)/2) ) or ( (len(x)%2!= 0) and (count== (len(x)+1)/2) ):
+    response ='True'
+  print(response)  
+
+
+def palindrome_v2(x):
+  response = 'True'
+  i=0
+  while (i < len(x)/2):
+    if(x[i] != x[-(i+1)]):
+      response = 'False' 
+      break 
+    i=i+1
+  print(response)   
+
+
+def palindrome_v3(x):
+  i=0
+  response= 'True'
+  while (i < len(x)):
+    if x[i] != rev_string(x[i]):
+      response = 'False'
+    i=i+1  
+  print(response)      
+
+
+  
+
+
+
+
+      

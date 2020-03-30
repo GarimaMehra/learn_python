@@ -114,7 +114,3 @@ def even_odd_factor(x):
 
 
 
-"""
-TODO: teach garima recursion in functions
-and None keyword in python
-"""
