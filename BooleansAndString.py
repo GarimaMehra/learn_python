@@ -67,15 +67,18 @@ def start_end(x,y):
 
 def rev_string(x):
   i = 0
+  response = ''
   while (i < len(x)):
-    print(x[-(i+1)])
+    response += x[-(i+1)]
     i=i+1
+  #print(response)
+  return response
 
-
-def rev_string2(x):
-    i = 0
-    for i in len(x):
-      return (x[-(i+1)])
+"""
+x 'ankit'
+i 0, 1, 2, 3, 4
+response '', 't', 'ti', 'tik', 'tikn', 'tikna'
+"""
 
 
 def palindrome(x):
@@ -103,16 +106,11 @@ def palindrome_v2(x):
 
 
 def palindrome_v3(x):
-  i=0
-  response= 'True'
-  while (i < len(x)):
-    if x[i] != rev_string(x[i]):
-      response = 'False'
-    i=i+1  
-  print(response)      
+  if( x == rev_string(x)):
+    print('true')
+  else:
+    print('false')      
 
-
-  
 
 
 
