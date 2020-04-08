@@ -153,3 +153,75 @@ def sum_of_evens(x):
 
 
 
+def get_budgets(x):  # learn dictionaries
+  i=0
+  y=0
+  while (i < len(x)):
+    a = x[i]
+    j = a['budget']
+    y = y + j
+    i = i + 1 
+  print(y)     
+
+
+def move_to_end(list1,num):
+  list1.remove(list1[0])
+  list1.append(num)
+  print(list1)
+
+
+
+def probability(x,num):
+  i = 0
+  count = 0
+  while (i<len(x)):
+    if (x[i] >= num):
+      count=count+1
+    i=i+1
+  p = (count*100)/len(x)
+  print (p)    
+
+
+def convert_cartesian(x,y):
+  if (len(x) != len(y)):
+    print ('Not valid')
+  i=0
+  z= []
+  while (i<len(x)):
+    a=[]
+    a=a+[x[i]]+[y[i]] 
+    z = z + [a]
+    i=i+1
+  print(z)   
+
+
+def sort_by_length(x):
+  i=0
+  c=[]
+  while (i < len(x)):
+    c = c+[len(x[i])]
+    i=i+1
+    a= sorted(c)
+  print (a)
+  j=0
+  b=[]
+   
+
+    
+
+  
+
+
+
+
+
+
+    
+    
+
+
+      
+      
+
+
+

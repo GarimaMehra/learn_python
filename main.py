@@ -6,6 +6,8 @@ import functionsAndTheirScope as f
 import BooleansAndString as b
 import NoneInPython as n
 import ListPython as l
+import dictionary_example as d
+import anki_ques as a
 
 ankitNew = "different variable"
 #red = 'red'
