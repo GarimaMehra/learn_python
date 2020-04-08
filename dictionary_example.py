@@ -64,13 +64,14 @@ def count_all(x):
   print(count_int)
 
 
-def find_occurrences2(x,y):
+def find_occurrences(x,y):
   a = {}
   i = 0
   b = ""
   while (i < len(x)):
     b = b + x[i]
-    if (x[i] == " "):
+    if (x[i] == " ") or (i == len(x)-1):
+      b = b.strip()
       j = 0
       count = 0
       while ( j < len(b)):
@@ -78,10 +79,37 @@ def find_occurrences2(x,y):
           count = count + 1
         j = j + 1  
       a[b] = count
+      b = ''
     i = i + 1
   print(a)
 
      
+def find_occurrences_v2(x,y):
+  a = {}
+  b = x.split(" ")
+  i = 0
+  while (i < len(b)):
+    count = 0
+    j = 0
+    while (j < len(b[i])):
+      c = b[i]
+      if (c[j] == y):
+        count = count + 1
+      j = j + 1
+    a[c]= count  
+    i = i + 1  
+  print(a)  
+
+
+def greatest_num(x):
+  i= 1
+  num = x[0]
+  while (i < len(x)):
+    if (num < x[i]):
+      num = x[i]  
+    i = i + 1  
+  print(num)
+
 
 
 

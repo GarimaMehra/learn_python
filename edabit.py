@@ -208,7 +208,14 @@ def sort_by_length(x):
    
 
     
-
+def greatest_num(x):
+  i= 1
+  num = x[0]
+  while (i < len(x)):
+    if (num < x[i]):
+      num = x[i]  
+    i = i + 1  
+  print(num)
   
 
 
