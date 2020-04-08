@@ -64,7 +64,7 @@ def count_all(x):
   print(count_int)
 
 
-def find_occurrences(x,y):
+def find_occurrences2(x,y):
   a = {}
   i = 0
   b = ""
@@ -80,6 +80,7 @@ def find_occurrences(x,y):
       a[b] = count
     i = i + 1
   print(a)
+
      
 
 
