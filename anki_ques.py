@@ -25,9 +25,18 @@ def swapp(x):
   x[len(x)-1] = a[0]
   print(x)
 
-def swap(x,y):
-  return (y,x)
+def swap(x,y,z) #y,z are elements of x
+  i = 0
+  while (i < len(x)):
+    a = [y,z]
+    if (x[i] == y)
+    
+    x[i] 
+  a = [y,z]
+  y = a[1]
+  z = a[0]
+  return x
 
 
 def swapp2(x):
-  return(swap(x[0], x[len(x)-1]))
+  return swap(x, x[0], x[len(x)-1])

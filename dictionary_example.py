@@ -101,15 +101,47 @@ def find_occurrences_v2(x,y):
   print(a)  
 
 
-def greatest_num(x):
-  i= 1
-  num = x[0]
-  while (i < len(x)):
-    if (num < x[i]):
-      num = x[i]  
-    i = i + 1  
-  print(num)
+def profit(x):
+  a = x['cp']
+  b = x['sp']
+  c = x['inv']
+  p = b - a
+  total_profit = p*c
+  p_percent = p*100/a
+  print(p)
+  print(total_profit)
+  if (type(p_percent) == int):
+    print(p_percent)
+  else:
+    d = p_percent - int(p_percent)
+    if (d < 0.5):
+      print(int(p_percent))
+    else:
+      print(int(p_percent) + 1)
 
 
+
+    
+def pie_chart(x):
+  sums= 0
+  for i in x:
+    sums = sums + x[i]
+  for i in x:
+    angle = (x[i]*360)/sums  
+    x[i] = angle
+  print(x)
+
+
+def oldest(x):
+  for i in x:
+    a= x[i]
+    b= i
+    break
+  for i in x:
+    if(a < x[i]):
+      a=x[i]   
+      b = i 
+  print(b) 
+   
 
 
