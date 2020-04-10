@@ -219,6 +219,21 @@ def greatest_num(x):
   
 
 
+def circular_shift(lst1,lst2,n):
+  i = 0
+  while (i < n):
+    j = 0
+    a = lst1[0]
+    while (j < len(lst1)-1):
+      lst1[j] = lst1[j+1]
+      j = j+1
+    lst1[j]= a  
+    i = i + 1
+  print(lst1)
+  if (lst1 == lst2):
+    return True
+  else:
+    return False  
 
 
 
