@@ -222,28 +222,80 @@ def greatest_num(x):
 def circular_shift(lst1,lst2,n):
   i = 0
   while (i < n):
-    j = 0
-    a = lst1[0]
-    while (j < len(lst1)-1):
-      lst1[j] = lst1[j+1]
-      j = j+1
+    j = len(lst1)-1
+    a = lst1[len(lst1)-1]
+    while (j > 0):
+      lst1[j] = lst1[j-1]
+      j = j-1
     lst1[j]= a  
     i = i + 1
   print(lst1)
   if (lst1 == lst2):
     return True
   else:
-    return False  
+    return False
+
+def swap(x,y):
+  return y,x
 
 
-
-
+def rearranged_diff(num):
+  x = str(num)
+  b = sorted(x)
+  c = b
+  d = ''
+  e = ''
+  print(c)
+  i =0
+  while (i < len(c)):
+    e = e + c[i]
+    i = i + 1
+  e = int(e)  
+  print(e)
+  i = 0
+  while (i < len(b)/2):
+    b[i], b[-(i+1)] = swap(b[i], b[-(i+1)])
+    i = i + 1
+  print(b) 
+  i = 0
+  while (i < len(b)):
+    d = d + b[i]
+    i = i + 1
+  d = int(d)  
+  print(d)
+  print(d-e) 
     
     
-
+def rearranged_diff_v2(num):
+  x = str(num)
+  b = sorted(x)
+  d = ''
+  e = ''
+  i =0
+  while (i < len(b)/2):
+    b[i], b[-(i+1)] = swap(b[i], b[-(i+1)])
+    i = i + 1
+  print(b) 
+  i = 0
+  while (i < len(b)):
+    d = d + b[i]
+    e = e + b[-(i+1)]
+    i = i + 1
+  d = int(d) 
+  e = int(e) 
+  print(d)
+  print(e)
+  print(d-e) 
 
       
       
-
+def add_str_nums(x,y):
+  x = int(x)
+  y = int(y)
+  if (type(x) != int or type(y) != int):
+    print('-1')
+  else: 
+    z = x + y
+    print(str(z))
 
 

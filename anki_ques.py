@@ -49,29 +49,5 @@ def add_first_num(x):
     print(x)
 
 
-def rearranged_diff(num):
-  x = str(num)
-  b = sorted(x)
-  c = b
-  d = ''
-  e = ''
-  print(c)
-  i =0
-  while (i < len(c)):
-    e = e + c[i]
-    i = i + 1
-  e = int(e)  
-  print(e)
-  i = 0
-  while (i < len(b)/2):
-    b[i], b[-(i+1)] = swap(b[i], b[-(i+1)])
-    i = i + 1
-  print(b)  
-  i = 0
-  while (i < len(b)):
-    d = d + b[i]
-    i = i + 1
-  d = int(d)  
-  print(d)
-  print(d-e)  
+ 
   
