@@ -1,6 +1,6 @@
 import conditionsAndLoops as c
 import github_ex as g
-import variablesConstantsScope as v
+import variablesConstantsScope as v1
 import edabit as e
 import functionsAndTheirScope as f
 import BooleansAndString as b
@@ -9,8 +9,13 @@ import ListPython as l
 import dictionary_example as d
 import anki_ques as a
 import todo as t
+import dataScience.csv as dsc
+from dataScience import lambda_examples as dsl
+import dataScience.list_comprehensions as dslc
+from dataScience import rough_work as dsr
 
 ankitNew = "different variable"
+
 #red = 'red'
 
 
@@ -119,7 +124,13 @@ def dod(num):
 
 
 
-  
+def lst(x):
+  for i in x:
+    print(i)  
+  j = 0
+  while (j < len(x)):
+    print(x[j]) 
+    j = j+1 
 
 
 

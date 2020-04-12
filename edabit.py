@@ -268,15 +268,12 @@ def rearranged_diff(num):
     
 def rearranged_diff_v2(num):
   x = str(num)
-  b = sorted(x)
+  b = sorted(x, reverse = True)
   d = ''
   e = ''
-  i =0
-  while (i < len(b)/2):
-    b[i], b[-(i+1)] = swap(b[i], b[-(i+1)])
-    i = i + 1
-  print(b) 
   i = 0
+  print(b)
+  i=0
   while (i < len(b)):
     d = d + b[i]
     e = e + b[-(i+1)]
@@ -289,7 +286,7 @@ def rearranged_diff_v2(num):
 
       
       
-def add_str_nums(x,y):
+def add_str_nums(x,y):#teach exceptions to garima via this todo ankit
   x = int(x)
   y = int(y)
   if (type(x) != int or type(y) != int):
@@ -299,3 +296,13 @@ def add_str_nums(x,y):
     print(str(z))
 
 
+"""
+123
++39
+___
+162   
+___
+"""
+
+
+  
