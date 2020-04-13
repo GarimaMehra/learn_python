@@ -9,9 +9,9 @@ import ListPython as l
 import dictionary_example as d
 import anki_ques as a
 import todo as t
-import dataScience.csv as dsc
-from dataScience import lambda_examples as dsl
-import dataScience.list_comprehensions as dslc
+import dataScience.week1.csv as dsc
+from dataScience.week1 import lambda_examples as dsl, numpy_examples as dsn
+import dataScience.week1.list_comprehensions as dslc
 from dataScience import rough_work as dsr
 
 ankitNew = "different variable"

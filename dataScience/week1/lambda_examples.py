@@ -10,6 +10,10 @@ for person in people:
     print(split_title_and_name(person) == (lambda person:person))
 
 #option 2
-print( list(map(split_title_and_name, people)) == list( map( ( lambda p : p.split()[0] + " " + p.split()[-1] ) , people )) )
+#print( list(map(split_title_and_name, people)) == list( map( ( lambda p : p.split()[0] + " " + p.split()[-1] ) , people )) )
 
+
+
+print(type(lambda x: x+1))
+print(lambda x: x+1)
 
