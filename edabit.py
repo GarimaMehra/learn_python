@@ -305,4 +305,33 @@ ___
 """
 
 
+def is_magic_sq(x):
+  a =x[0]
+  print(a)
+  i = 0
+  count = 0
+  while (i < len(a)):
+    count = count + a[i]
+    i = i + 1
+  print(count)  
+  i = 1
+  sums = 0
+  while (i < len(x)):
+    j = 0
+    b = x[i]
+    print(b)
+    while (j < len(b)):
+      sums = sums + b[j]
+      j = j + 1
+    if (sums != count):
+      print('false')
+      break 
+    i = i + 1
+  print('true')
+
+     
+    
+
+
+
   
