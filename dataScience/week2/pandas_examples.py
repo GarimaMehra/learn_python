@@ -21,9 +21,9 @@ df.index = names_ids.str[0] # the [0] element is the country name (new index)
 df['ID'] = names_ids.str[1].str[:3] # the [1] element is the abbreviation or ID (take first 3 characters from that)
 
 df = df.drop('Totals')
-print(df.head())
+#print(df.head())
 
-def answer_one():#tumhe ye boolean mask waala tareeka samajh aaya ?
+def answer_one():
   response = -1
   dfl = df
   dfl = dfl[ dfl['Gold'] == dfl['Gold'].max()]
@@ -38,6 +38,14 @@ def answer1():
   df2=df2.set_index('Gold')
   a = df2.loc[df2.index.max()]['country']
   return a
+
+
+def answer1v2():
+  df2 = df.Gold#same as df['Gold']
+  return df2.idxmax()
+
+def answer_twov2():
+  return (df['Gold'] - df['Gold.1']).abs().argmax()
   
 def answer_two():
   df2 = df
@@ -73,15 +81,7 @@ def answer3():
   df2['total'] = df2['Gold'] + df2['Gold.1']
   print(type(df2['total']))
   print(type(df2['Gold.2']))
-  k = df2['total'].equals(df2['Gold.2'])# now k will contain true constant as value.. ok Sirjee :) bbye.. bye love. thank you :*
-  
-  """#
-   if consfused why == equal to sign s not working. check what is the type of object by print(type(df2['total'])). Check if both have same type. I want to know if they both are equal or not?
-
-   I have uploaded census file just adjacent olymipics.. 
-   ok..search in google how to check if two pands series are equal.. ok
-
-   """
+  k = df2['total'].equals(df2['Gold.2'])
   print(df2.head())
   df2['Rel_diff'] = abs(df2['Gold'] - df2['Gold.1'])/df2['total']
   print(df2.head())
@@ -101,16 +101,16 @@ census_df= pd.read_csv('dataScience/week2/census.csv')
 
 def answer5():
   df2 = census_df
-  df2 = df2[df2['COUNTY'] == df2['COUNTY'].max()]
-  return df2['STNAME']
-  
+  dfGrpBy = df2.groupby('STNAME')
+  dfGrpBySeries = dfGrpBy.size()
+  #print(df2.groupby('STNAME').size().idxmax())
+  return dfGrpBySeries.idxmax()
 
-def answer6():
-  df2 = census_df
-  df2 = df2.set_index(['STNAME','CTYNAME'])
-  print(df2.head())
-  df2['CENSUS2010POP'] = sorted(df2['CENSUS2010POP'])
-  print(df2.head())
+#answer5()
+
+#group by pandas.Dataframe https://www.tutorialspoint.com/python_pandas/python_pandas_groupby.htm and https://www.geeksforgeeks.org/python-pandas-dataframe-groupby/
+  
+  
 
 
   
