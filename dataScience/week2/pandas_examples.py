@@ -103,22 +103,47 @@ def answer5():
   df2 = census_df
   dfGrpBy = df2.groupby('STNAME')
   dfGrpBySeries = dfGrpBy.size()
-  #print(df2.groupby('STNAME').size().idxmax())
+  #print(dfGrpBy['ESTIMATESBASE2010'].get_group('Alabama'))
   return dfGrpBySeries.idxmax()
 
-#answer5()
+
 
 #group by pandas.Dataframe https://www.tutorialspoint.com/python_pandas/python_pandas_groupby.htm and https://www.geeksforgeeks.org/python-pandas-dataframe-groupby/
   
+def answer6():
+  df2 = census_df
+  dfGrpBy = df2.groupby('STNAME')['CENSUS2010POP'].apply(lambda x: x.nlargest(3).sum())
+  print((dfGrpBy).nlargest(3).index)
   
-
-
+  
+def answer6_v2():
+  df2 = census_df
+  dfGrpBy = df2.groupby('STNAME')['CENSUS2010POP'].nlargest(3).sum(level = 0)
+  print(dfGrpBy.nlargest(3).index)  
   
   
+def answer7():
+  df2 = census_df[census_df['SUMLEV'] ==50]
+  df2 = df2.set_index('CTYNAME')
+  df2['max'] = df2[['POPESTIMATE2010','POPESTIMATE2011','POPESTIMATE2012', 'POPESTIMATE2013', 'POPESTIMATE2014','POPESTIMATE2015']].max(axis =1, skipna = True)
+  print(df2.head())
+  df2['min'] = df2[['POPESTIMATE2010','POPESTIMATE2011','POPESTIMATE2012', 'POPESTIMATE2013', 'POPESTIMATE2014','POPESTIMATE2015']].min(axis =1, skipna = True)
+  print(df2.head())
+  df2['abs_max'] = df2['max'] - df2['min']
+  print(df2.head())
+  print(df2['abs_max'].idxmax())
+
+
+def answer8():
+  df2 = census_df.copy()
+  print(df2['REGION'].unique())
+  df2 = df2[((df2['REGION']==1) | (df2['REGION']==2)) & (df2["CTYNAME"].str.startswith('Washington')) & (df2['POPESTIMATE2015'] > df2['POPESTIMATE2014'])]
+  df2 = df2.loc[:,['STNAME','CTYNAME']]
+  print(df2.head(10))
   
-
-
-
+  
+answer8()
+  
 
 
 
