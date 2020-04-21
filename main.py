@@ -9,6 +9,7 @@ import ListPython as l
 import dictionary_example as d
 import anki_ques as a
 import todo as t
+import classesAndGarbageCollection as cl
 #import dataScience.week1.csv as dsc
 #from dataScience.week1 import lambda_examples as dsl, numpy_examples as dsn
 #import dataScience.week1.list_comprehensions as dslc
