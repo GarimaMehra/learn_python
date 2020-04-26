@@ -113,13 +113,18 @@ def answer6():
   df2 = census_df[census_df['SUMLEV'] ==50]
   dfGrpBy = df2.groupby('STNAME')['CENSUS2010POP']
   dfGrpBy = dfGrpBy.apply(lambda x: x.nlargest(3).sum())
+  #print(type(dfGrpBy))#<class 'pandas.core.series.Series'>
   return list( (dfGrpBy).nlargest(3).index )
   
   
 def answer6_v2():
   df2 = census_df[census_df['SUMLEV'] ==50]
   dfGrpBy = df2.groupby('STNAME')['CENSUS2010POP'].nlargest(3)
+  #print(dfGrpBy.index)
+  #print(type(dfGrpBy))#<class 'pandas.core.series.Series'>
   dfGrpBy = dfGrpBy.sum(level = 0)
+  #print(dfGrpBy)
+  #print(type(dfGrpBy))#<class 'pandas.core.series.Series'>
   return list( dfGrpBy.nlargest(3).index )
   
   
@@ -138,5 +143,4 @@ def answer8():#
   df2 = df2.loc[:,['STNAME','CTYNAME']]
   return df2
   
-#print(answer6())   
-#print(type(answer6()))
+#print(answer6_v2()) 

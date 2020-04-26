@@ -46,6 +46,14 @@ class myCircle:
     self.pieWithMorePrecision = 3.141516
 
   """
+  retuning self for allowing method chaining in this function. To support chaing of methods in a class plese return self from those methods.
+  """
+  def increaseRadiusBy(self, inc):
+    self.radius+=inc
+    return self
+
+
+  """
   The self parameter is a reference to the current object which is calling that function or property in class
   """
   def getArea(self):
@@ -166,6 +174,7 @@ def classExamples():
   myStringClass.printAPoem()#so when you call a class's method using a class object the first argument always to that method become the calling object itself. But, if you call it via className like myStringClass it will not add any extra argument, unlike calling by object
 
   c1 = myCircle(2)
+  print(c1.increaseRadiusBy(1).getArea(), end="next line")#method chaining
   c2 = myCircle(3)
   print(c1.getArea())
   print(c2.getArea())
@@ -196,6 +205,6 @@ def classExamples():
   # read about garbage collection in python https://www.tutorialspoint.com/How-does-garbage-collection-work-in-Python. Python has an automatic grabage colector which uses unused variables and object when not in use to reclaim memory as every object and varibale uses memory.
 
 
-#classExamples()#remoe the comment here
+#classExamples()#remove the comment here
 
 
