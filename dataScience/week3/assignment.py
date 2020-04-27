@@ -36,7 +36,8 @@ print(Scimen.shape)
 energy=energy.set_index('Country')
 print(energy.head())
 
-GDP = GDP.set_index('Country Name')
+GDP= GDP.rename(columns={'Country Name': 'Country'})
+GDP = GDP.set_index('Country')
 GDP = GDP.loc[:, '2006':'2015'] 
 print(GDP.head())
 
@@ -137,15 +138,43 @@ ContinentDict  = {'China':'Asia', 'United States':'North America', 'Japan':'Asia
 
 
 def answer_eleven():
+  df = df3.copy()
+  df['Continent'] = pd.Series({'China':'Asia', 'United States':'North America', 'Japan':'Asia', 'United Kingdom':'Europe', 'Russian Federation':'Europe', 'Canada':'North America', 'Germany':'Europe','India':'Asia','France':'Europe', 'South Korea':'Asia', 'Italy':'Europe', 'Spain':'Europe', 'Iran':'Asia', 'Australia':'Australia', 'Brazil':'South America'})
+  df = df.reset_index()
+  #print(df)
+  df['Population'] = pd.to_numeric (df['Energy Supply']/df['Energy Supply per Capita'])
+  print(df)
+  dfGrpBy = df.set_index('Continent').groupby(level=0)['Population'].agg([np.size, np.sum, np.mean, np.std])
+  print(dfGrpBy.head())
+  print(type(dfGrpBy))
+  #dfGrpBy2 = dfGrpBy.size().to_frame('Size')
+  #print(dfGrpBy2.head())
+  
+  #
+  #print(dfGrpBy)
+  #dfGrpBy['Mean'] = dfGrpBy['Population'].agg(np.mean)
+  #print(dfGrpBy.head())
 
 
-answer_ten()
+ #answer_eleven()
+
+def answer_twelve():
+  df = df3.copy()
+  df['Continent'] = pd.Series({'China':'Asia', 'United States':'North America', 'Japan':'Asia', 'United Kingdom':'Europe', 'Russian Federation':'Europe', 'Canada':'North America', 'Germany':'Europe','India':'Asia','France':'Europe', 'South Korea':'Asia', 'Italy':'Europe', 'Spain':'Europe', 'Iran':'Asia', 'Australia':'Australia', 'Brazil':'South America'})
+  df['Bins'] = pd.cut(df['% Renewable'],5)
+  print(df.head())
+  df = df.groupby(['Continent','Bins']).size()
+  print(df.head())
+  print(type(df))
 
 
+def answer_thirteen():
+  df = df3.copy()
+  df['Population'] = pd.to_numeric (df['Energy Supply']/df['Energy Supply per Capita'])
+  df['PopEst'] = df['Population'].apply('{:,}'.format)
+  print(df['PopEst'])
 
 
-
-
-
+answer_thirteen()
 
 

@@ -102,7 +102,9 @@ census_df= pd.read_csv('dataScience/week2/census.csv')
 def answer5():
   df2 = census_df
   dfGrpBy = df2.groupby('STNAME')
+  print(dfGrpBy.head(10))
   dfGrpBySeries = dfGrpBy.size()
+  print(dfGrpBySeries.head(20))
   return dfGrpBySeries.idxmax()
 
 
@@ -143,4 +145,4 @@ def answer8():#
   df2 = df2.loc[:,['STNAME','CTYNAME']]
   return df2
   
-#print(answer6_v2()) 
+#print(answer5()) 
