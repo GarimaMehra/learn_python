@@ -1,180 +1,168 @@
 import pandas as pd
 import numpy as np
+pd.set_option('display.max_rows', None)
 
-energy = pd.read_excel('dataScience/week3/Energy Indicators.xls')
-energy = energy[17: 245]
-print(energy.shape)
-energy.drop(energy.columns[[0,1]], axis = 1, inplace = True) 
-energy.columns = ['Country', 'Energy Supply', 'Energy Supply per Capita', '% Renewable']
-print (energy.head())
-energy['Energy Supply'] = energy['Energy Supply']*1000000
-print (energy['Energy Supply'])
-energy['Country'] = energy['Country'].str.replace('\d+', '')
-energy['Country'] = energy['Country'].str.replace(r"\s*\([^()]*\)","").str.strip()
-#print(energy.iloc[197])
-#print(energy.iloc[11])
-#print(energy.iloc[24])
 
-energy['Country'] = energy['Country'].replace({"Republic of Korea": "South Korea", "United States of America": "United States", "United Kingdom of Great Britain and Northern Ireland": "United Kingdom", "China, Hong Kong Special Administrative Region": "Hong Kong"})
 
-print(energy['Country'])
-print(energy.iloc[43]['Country'])
+def answer_one():
+  energy = pd.read_excel('dataScience/week3/Energy Indicators.xls')
+  energy = energy[17: 244]
+  energy.drop(energy.columns[[0,1]], axis = 1, inplace = True)
+  energy.columns = ['Country', 'Energy Supply', 'Energy Supply per Capita', '% Renewable']
+  energy = energy.replace('...',np.NaN)
+  energy['Energy Supply'] = energy['Energy Supply']*1000000
+  energy['Country'] = energy['Country'].str.replace('\d+', '')
+  energy['Country'] = energy['Country'].str.replace(r"\s*\([^()]*\)","").str.strip()
+  energy['Country'] = energy['Country'].replace({"Republic of Korea": "South Korea", "United States of America": "United States", "United Kingdom of Great Britain and Northern Ireland": "United Kingdom", "China, Hong Kong Special Administrative Region": "Hong Kong"})
+  energy=energy.set_index('Country')
 
-GDP = pd.read_csv('dataScience/week3/world_bank.csv', skiprows = 4)
+  GDP = pd.read_csv('dataScience/week3/world_bank.csv', skiprows = 4)
+  GDP['Country Name'] = GDP['Country Name'].replace({'Korea, Rep.': 'South Korea', 'Iran, Islamic Rep.':'Iran', 'Hong Kong SAR, China': 'Hong Kong'})
+  GDP= GDP.rename(columns={'Country Name': 'Country'})
+  GDP = GDP.set_index('Country')
+  GDP = GDP.loc[:, '2006':'2015']
 
-print(GDP.head())
-print(GDP.shape)
-GDP['Country Name'] = GDP['Country Name'].replace({'Korea, Rep.': 'South Korea', 'Iran, Islamic Rep.':'Iran', 'Hong Kong SAR, China': 'Hong Kong'})
-print(GDP.head())
-print(GDP.iloc[124])
-print(GDP.iloc[94])
 
-Scimen = pd.read_excel('dataScience/week3/scimagojr-3.xlsx')
-print(Scimen.head())
-print(Scimen.shape)
+  ScimEn = pd.read_excel('dataScience/week3/scimagojr-3.xlsx')
+  ScimEn = ScimEn.set_index('Country')
 
-energy=energy.set_index('Country')
-print(energy.head())
-
-GDP= GDP.rename(columns={'Country Name': 'Country'})
-GDP = GDP.set_index('Country')
-GDP = GDP.loc[:, '2006':'2015'] 
-print(GDP.head())
-
-Scimen = Scimen.set_index('Country')
-print(Scimen.head())
-
-df1 = pd.merge(Scimen, energy, how = 'inner', left_index = True, right_index =True)
-print(df1.head())
-print(df1.shape)
-df2 = pd.merge(df1, GDP, how ='inner',left_index = True, right_index = True)
-df3 = df2[:15]
-print(df3)
-print(df3.shape)
+  df1 = pd.merge(ScimEn, energy, how = 'inner', left_index = True, right_index =True)
+  df2 = pd.merge(df1, GDP, how ='inner',left_index = True, right_index = True)
+  response = df2[:15]
+  return response
 
 def answer_two():
-  missing_entries = len(df2)-len(df3)
-  print(missing_entries)
+  energy = pd.read_excel('dataScience/week3/Energy Indicators.xls')
+  energy = energy[17: 244]
+  energy.drop(energy.columns[[0,1]], axis = 1, inplace = True)
+  energy.columns = ['Country', 'Energy Supply', 'Energy Supply per Capita', '% Renewable']
+  energy['Energy Supply'] = energy['Energy Supply']*1000000
+  energy.replace('...',np.NaN)
+  energy['Country'] = energy['Country'].str.replace('\d+', '')
+  energy['Country'] = energy['Country'].str.replace(r"\s*\([^()]*\)","").str.strip()
+  energy['Country'] = energy['Country'].replace({"Republic of Korea": "South Korea", "United States of America": "United States", "United Kingdom of Great Britain and Northern Ireland": "United Kingdom", "China, Hong Kong Special Administrative Region": "Hong Kong"})
+  energy=energy.set_index('Country')
+  
+  GDP = pd.read_csv('dataScience/week3/world_bank.csv', skiprows = 4)
+  GDP['Country Name'] = GDP['Country Name'].replace({'Korea, Rep.': 'South Korea', 'Iran, Islamic Rep.':'Iran', 'Hong Kong SAR, China': 'Hong Kong'})
+  GDP= GDP.rename(columns={'Country Name': 'Country'})
+  GDP = GDP.set_index('Country')
+  GDP = GDP.loc[:, '2006':'2015']
 
 
+  ScimEn = pd.read_excel('dataScience/week3/scimagojr-3.xlsx')
+  ScimEn = ScimEn.set_index('Country')
+
+
+  df1 = pd.merge(ScimEn, energy, how = 'inner', left_index = True, right_index =True)
+  df2 = pd.merge(df1, GDP, how ='inner',left_index = True, right_index = True)
+  
+  
+  df3 = pd.merge(ScimEn, energy, how = 'outer', left_index = True, right_index =True)
+  df4 = pd.merge(df3, GDP, how ='outer',left_index = True, right_index = True)
+  response = len(df4)-len(df2)
+  return response
 
 def answer_three():
-  df = df3.loc[:, '2006':'2015']
+  Top15 = answer_one()
+  df = Top15.loc[:, '2006':'2015']
   df['avgGDP'] = df.mean(axis =1, skipna = True) 
-  print(df['avgGDP'])
-  print(type(df['avgGDP']))
-
+  df = df.sort_values(by=['avgGDP'], ascending=False)
+  return df['avgGDP']
 
 
 def answer_four():
-  df = df3.loc[:, '2006':'2015']
+  Top15 = answer_one()
+  df = Top15.loc[:, '2006':'2015']
   df['avgGDP'] = df.mean(axis =1, skipna = True)
   df = df.sort_values(by=['avgGDP'], ascending=False)
-  c = df.index[5]
-  print(c)
-  d = (df['2015'].iloc[5])-(df['2006'].iloc[5])
-  print(d)
+  value = (df['2015'].iloc[5])-(df['2006'].iloc[5])
+  return float(value)
+
 
 def answer_five():
-  mean_energy_supply = df3['Energy Supply per Capita'].mean(axis=0, skipna = True)
-  print(mean_energy_supply)
+  Top15 = answer_one()
+  mean_energy_supply = Top15['Energy Supply per Capita'].mean(axis = 0)
+  return float(mean_energy_supply)
 
 
 def answer_six():
-  df = df3['% Renewable']
-  a = df.max()
-  print(a)
-  b = df3[df3['% Renewable']== df3['% Renewable'].max()]
-  response = b.index[0]
-  print(response)
-  c = (a, response)
-  print(c)
-# Unable to use idxmax in this question.  
-
-
-def answer_seven():
-  df = df3.copy()
-  df['Ratio'] = df['Self-citations']/df['Citations']
-  c = (df['Ratio'].idxmax(),df['Ratio'].max())
-  print(c)
+  Top15 = answer_one()
+  df = Top15['% Renewable']
+  Max_renew = df.max()
+  response = Top15[Top15['% Renewable']== Top15['% Renewable'].max()]
+  Max_country = response.index[0]
+  return (Max_country, float(Max_renew))
   
 
-def answer_eight():
-  df = df3.copy()
-  df['Population'] = df['Energy Supply']/df['Energy Supply per Capita']
-  df = df.sort_values(by=['Population'], ascending=False)
-  print(df.index[2])
-# Unable to use nlargest in this question.
+def answer_seven():
+  Top15 = answer_one()
+  Top15['Ratio'] = Top15['Self-citations']/Top15['Citations']
+  response = (str(Top15['Ratio'].idxmax()),float(Top15['Ratio'].max()))
+  return response
 
+
+def answer_eight():
+  Top15 = answer_one()
+  Top15['Population'] = Top15['Energy Supply']/Top15['Energy Supply per Capita']
+  Top15 = Top15.sort_values(by=['Population'], ascending=False)
+  response = Top15.index[2]
+  return response
 
 
 def answer_nine():
-  df = df3.copy()
-  df['Population'] = df['Energy Supply']/df['Energy Supply per Capita']
-  df['Citable Documents per Capita'] = df['Citable documents']/df['Population']
-  df['Citable Documents per Capita']=df['Citable Documents per Capita']
-  data = df[['Citable Documents per Capita','Energy Supply per Capita']].corr()
-  print(data)
-
+  Top15 = answer_one()
+  Top15['Population'] = pd.to_numeric(Top15['Energy Supply']/Top15['Energy Supply per Capita'])
+  Top15['Citable Documents per Capita'] = pd.to_numeric(Top15['Citable documents']/Top15['Population'])
+  data = Top15[['Citable Documents per Capita','Energy Supply per Capita']]
+  data = data.astype({'Energy Supply per Capita': 'float'}, copy = False)
+  #print(data.dtypes)
+  data = data['Citable Documents per Capita'].corr(data['Energy Supply per Capita'])
+  return float(data)
 
 def answer_ten():
-  df = df3.copy()
-  df = df.sort_values(by=['% Renewable'])
-  print(df['% Renewable'])
-  median = df['% Renewable'].iloc[7]
-  print(median)
+  Top15 = answer_one()
+  median = Top15['% Renewable'].median()
   a = [] 
-  for item in df['% Renewable']:
+  for item in Top15['% Renewable']:
     if item < median:
       med = 0
     if item >= median:
       med = 1  
     a = a + [med]
-  df['Median'] = a  
-  df = df.sort_values(by=['Rank'])
-  print(df['Median'])     
-
-ContinentDict  = {'China':'Asia', 'United States':'North America', 'Japan':'Asia', 'United Kingdom':'Europe', 'Russian Federation':'Europe', 'Canada':'North America', 'Germany':'Europe','India':'Asia','France':'Europe', 'South Korea':'Asia', 'Italy':'Europe', 'Spain':'Europe', 'Iran':'Asia', 'Australia':'Australia', 'Brazil':'South America'}
+  Top15['HighRenew'] = a  
+  return Top15['HighRenew'] 
 
 
 def answer_eleven():
-  df = df3.copy()
-  df['Continent'] = pd.Series({'China':'Asia', 'United States':'North America', 'Japan':'Asia', 'United Kingdom':'Europe', 'Russian Federation':'Europe', 'Canada':'North America', 'Germany':'Europe','India':'Asia','France':'Europe', 'South Korea':'Asia', 'Italy':'Europe', 'Spain':'Europe', 'Iran':'Asia', 'Australia':'Australia', 'Brazil':'South America'})
-  df = df.reset_index()
-  #print(df)
-  df['Population'] = pd.to_numeric (df['Energy Supply']/df['Energy Supply per Capita'])
-  print(df)
-  dfGrpBy = df.set_index('Continent').groupby(level=0)['Population'].agg([np.size, np.sum, np.mean, np.std])
-  print(dfGrpBy.head())
-  print(type(dfGrpBy))
-  #dfGrpBy2 = dfGrpBy.size().to_frame('Size')
-  #print(dfGrpBy2.head())
+  Top15 = answer_one()
+  Top15['Continent'] = pd.Series({'China':'Asia', 'United States':'North America', 'Japan':'Asia', 'United Kingdom':'Europe', 'Russian Federation':'Europe', 'Canada':'North America', 'Germany':'Europe','India':'Asia','France':'Europe', 'South Korea':'Asia', 'Italy':'Europe', 'Spain':'Europe', 'Iran':'Asia', 'Australia':'Australia', 'Brazil':'South America'})
+  Top15 = Top15.reset_index()
+  Top15['Population'] = pd.to_numeric (Top15['Energy Supply']/Top15['Energy Supply per Capita'])
+  response = Top15.set_index('Continent').groupby(level=0)['Population'].agg([np.size, np.sum, np.mean, np.std])
+  return response
   
-  #
-  #print(dfGrpBy)
-  #dfGrpBy['Mean'] = dfGrpBy['Population'].agg(np.mean)
-  #print(dfGrpBy.head())
-
-
- #answer_eleven()
 
 def answer_twelve():
-  df = df3.copy()
-  df['Continent'] = pd.Series({'China':'Asia', 'United States':'North America', 'Japan':'Asia', 'United Kingdom':'Europe', 'Russian Federation':'Europe', 'Canada':'North America', 'Germany':'Europe','India':'Asia','France':'Europe', 'South Korea':'Asia', 'Italy':'Europe', 'Spain':'Europe', 'Iran':'Asia', 'Australia':'Australia', 'Brazil':'South America'})
-  df['Bins'] = pd.cut(df['% Renewable'],5)
-  print(df.head())
-  df = df.groupby(['Continent','Bins']).size()
-  print(df.head())
-  print(type(df))
+  Top15 = answer_one()
+  Top15['Continent'] = pd.Series({'China':'Asia', 'United States':'North America', 'Japan':'Asia', 'United Kingdom':'Europe', 'Russian Federation':'Europe', 'Canada':'North America', 'Germany':'Europe','India':'Asia','France':'Europe', 'South Korea':'Asia', 'Italy':'Europe', 'Spain':'Europe', 'Iran':'Asia', 'Australia':'Australia', 'Brazil':'South America'})
+  Top15['Bins'] = pd.cut(Top15['% Renewable'],5)
+  response = Top15.groupby(['Continent','Bins']).size()
+  response = response[response > 0].dropna().astype('int64')
+  return response
 
+    
 
 def answer_thirteen():
-  df = df3.copy()
-  df['Population'] = pd.to_numeric (df['Energy Supply']/df['Energy Supply per Capita'])
-  df['PopEst'] = df['Population'].apply('{:,}'.format)
-  print(df['PopEst'])
+  Top15 = answer_one()
+  Top15['Population'] = pd.to_numeric (Top15['Energy Supply']/Top15['Energy Supply per Capita'])
+  Top15['PopEst'] = Top15['Population'].apply('{:,}'.format)
+  return Top15['PopEst']
 
 
-answer_thirteen()
 
-
+"""
+k = answer_one()
+print( k )
+print( type(k))
+"""
