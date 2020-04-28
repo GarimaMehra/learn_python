@@ -161,8 +161,3 @@ def answer_thirteen():
 
 
 
-"""
-k = answer_one()
-print( k )
-print( type(k))
-"""
