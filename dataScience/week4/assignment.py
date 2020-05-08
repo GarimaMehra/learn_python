@@ -26,12 +26,73 @@ def get_list_of_university_towns():
 
   print(df)  
 
-get_list_of_university_towns()    
+#get_list_of_university_towns()    
  
  
+def get_recession_start():
+  df = pd.read_excel('dataScience/week4/gdplev.xls', skiprows = 7) 
+
+  df = df.iloc[:,4:7]
+
+  df.columns=['Quarter', 'GDP(current_dollars)', 'GDP(chained_2009_dollars)']
+  print(df.head())
+
+  print(type(df.iloc[4]['GDP(current_dollars)']))
+
+  a = df['GDP(current_dollars)'] 
+  i = 0
+  for item in df['GDP(current_dollars)']:
+
+    if a[i] > a[i+1]> a[i+2]:
+      print(item)
+      print(df.loc[df['GDP(current_dollars)'] == item, 'Quarter'])
+      break
+    else:
+      i = i+1  
   
- 
+
+#get_recession_start()
+
+
+def get_recession_end():
+  df = pd.read_excel('dataScience/week4/gdplev.xls', skiprows = 7) 
+
+  df = df.iloc[:,4:7]
+
+  df.columns=['Quarter', 'GDP(current_dollars)', 'GDP(chained_2009_dollars)']
+
+  a = df['GDP(current_dollars)'] 
+  i = 0
+  for item in df['GDP(current_dollars)']:
+
+    if a[i] > a[i+1]> a[i+2] < a[i+3] < a[i+4]:
+      value = a[i+2]
+      print(value)
+      print(df.loc[df['GDP(current_dollars)'] == value, 'Quarter'])
+    
+    else:
+      i = i+1 
+
+
+get_recession_end()
 
 
 
+def get_recession_bottom():
+  df = pd.read_excel('dataScience/week4/gdplev.xls', skiprows = 7) 
 
+  df = df.iloc[:,4:7]
+
+  df.columns=['Quarter', 'GDP(current_dollars)', 'GDP(chained_2009_dollars)']
+
+  a = df['GDP(current_dollars)'] 
+  i = 0
+  for item in df['GDP(current_dollars)']:
+
+    if a[i] > a[i+1]> a[i+2] < a[i+3] < a[i+4]:
+      value = a[i+2]
+      print(value)
+      print(df.loc[df['GDP(current_dollars)'] == value, 'Quarter'])
+      break
+    else:
+      i = i+1 
