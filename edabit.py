@@ -330,7 +330,56 @@ def is_magic_sq(x):
   print('true')
 
      
-    
+def combinations(*argv):
+  a = 1 
+  for i in argv:
+    a = a*i
+  print(i)  
+
+def replace(arg,x,y):
+  i = 0
+  b = ''
+  while i < len(arg):
+    if (arg[i] == x):
+      b = b + y
+    else:
+      b = b + arg[i]  
+    i = i+1  
+  return b    
+
+
+  
+def encrypt(x):
+  a = ''
+  i = 0
+  while i < len(x):
+    a = a + x[-(i+1)]
+    i = i +1
+  print(a)
+  a = replace(a, 'a', '0')
+  a = replace(a, 'e', '1')
+  a = replace(a, 'i', '2')
+  a = replace(a, 'o', '3')
+  a = replace(a, 'u', '4')
+  print(a+'aca')
+ 
+
+def consecutive_combo(lst1,lst2):
+  a = False
+  lst3 = lst1 + lst2
+  lst3 =sorted(lst3)
+  i = 0
+  while (i < len(lst3)-1):
+    if (lst3[i] + 1 == lst3[i+1]):
+      a = True
+    else:
+      a = False
+      break  
+    i = i + 1        
+  return a
+  
+  
+
 
 
 
